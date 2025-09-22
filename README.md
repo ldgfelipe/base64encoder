@@ -1,10 +1,15 @@
-# base64encoder
+# codificador-base64
 
-plug para super encriptación con base64 para nuxt de vuejs
+Plugin para "super encriptación" con Base64 para Vue.js/Nuxt (solo del lado del cliente).
 
-var string = "contraseña";
+Ejemplo de uso dentro de un componente Vue/Nuxt:
 
-var encode = this.$superEncode(string); ///// convierte sobre encripta n veces base64 
+var cadena = "contraseña";
 
-var decoder = this.$superDecode(encode); ///// detecta n veces codificación y desencripta 
+var encriptado = this.$superEncriptar(cadena); ///// encripta n veces en base64 y agrega prefijo
 
+var desencriptado = this.$superDesencriptar(encriptado); ///// detecta n y desencripta
+
+Compatibilidad: también puedes usar this.$superEncode y this.$superDecode (alias de los anteriores).
+
+Nota: Esto solo ofusca datos. No es criptografía segura.

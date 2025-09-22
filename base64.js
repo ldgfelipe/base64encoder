@@ -1,42 +1,40 @@
 import Vue from 'vue'
 
-/////// plugin base64 se utiliza para validar usuario y contraseña o encriptar el envio de la informacion 
-/////// create by: ldgframe
+/////// plugin base64 se utiliza para validar usuario y contraseña o encriptar el envío de la información
+/////// creado por: ldgframe
+/////// actualizado: métodos en español con compatibilidad hacia atrás
 
+const encriptar = (p) => {
+  //// el primer número es la cantidad de veces que se encripta el código (1..8)
+  const n = Math.floor(Math.random() * 8) + 1
 
-Vue.prototype.$superEncode=(p)=>{
-////// el primer numero es el numero que veces que se encripta el codigo 
-var n=Math.floor(Math.random()*9)
+  let encode = String(p)
 
-var encode=p;
+  for (let i = 0; i < n; i++) {
+    /// se codifica tantas veces como n lo indique
+    encode = btoa(encode)
+  }
+  const nu = btoa(String(n)) /// se codifica n
 
-if(n===0){
-	////si es 0 se lanza nuevamente la funcion
-	this.$superEncode(p);
-}else{
-for(var i=0;i<n;i++){
-	/// se codifica tantas veces como n lo repita 
-encode=btoa(encode);
-}
-var nu=btoa(n) /// se condifica n vecess 
-
-encode=nu+")"+encode; /// se une cadena como respuesta 
-}
-	return encode ///// lanza resultado 
+  return `${nu})${encode}` /// se une cadena como respuesta
 }
 
-Vue.prototype.$superDecode=(p)=>{
-//// decodificador 
-	var divstr=p.split(")"); /// separa 
-	var nves=atob(divstr[0])-1; /// decodifica n veces
-	var decode=divstr[1];
+const desencriptar = (p) => {
+  //// decodificador
+  const divstr = String(p).split(')') /// separa
+  const nVeces = Number(atob(divstr[0])) /// decodifica cantidad de veces
+  let decode = divstr[1]
 
-	for(var n=0;n<nves;n++){
-			
-			decode=atob(decode);	//// decodifica n veces -1
-
-	}
-	decode=atob(decode); /// ultima decodificacion 
-	return decode ///lanza resultado
-
+  for (let i = 0; i < nVeces; i++) {
+    decode = atob(decode) //// decodifica n veces
+  }
+  return decode /// lanza resultado
 }
+
+// Métodos principales en español
+Vue.prototype.$superEncriptar = encriptar
+Vue.prototype.$superDesencriptar = desencriptar
+
+// Compatibilidad con los nombres en inglés existentes
+Vue.prototype.$superEncode = encriptar
+Vue.prototype.$superDecode = desencriptar
