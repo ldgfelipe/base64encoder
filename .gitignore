@@ -1,0 +1,30 @@
+# Archivos y directorios comunes a ignorar en proyectos Node/Vue
+node_modules/
+
+# Registros
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Construcciones y coberturas
+/dist/
+/build/
+/.nuxt/
+/coverage/
+/.nyc_output/
+
+# Cachés y artefactos locales
+/.cache/
+.sourcemaps/
+
+# Entornos locales
+.env
+.env.*.local
+*.local
+
+# Sistemas y editores
+.DS_Store
+.idea/
+.vscode/
